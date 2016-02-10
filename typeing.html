@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>eng</title>
+<link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="theme-color" content="#008080"/>
+<style>
+input,
+textarea,
+select {
+	font-size: 16px;
+}
+#i{
+	width:80%;
+	font-size:20px;
+	outline: 0;
+	border-color:white;
+	color:white;
+	ime-mode:disbled;
+	margin: 0;
+	padding: 0;
+	background: none;
+	border: none;
+	border-radius: 0;
+	outline: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+.center{
+	text-align:center;
+}
+</style>
+</head>
+<body>
+<div class="center">
+<p><input type="text" id="i" class="center" onblur="this.focus()" autofocus pattern="^[0-9A-Za-z.]+$"></p>
+<p id="r"></p>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+var imt="";
+var mts="";
+$(function(){
+setTimeout(function(){$("#i").click();},100);
+$("#i").on('keydown keyup keypress change',function(e){
+var iat=$("#i").val();
+//alert(JSON.stringify(e));
+//console.log(e);
+if(e.which==8){
+if(e.type=="keydown"){
+mts=mts.substr(0,(mts.length-1));
+$("#r").text(roman2hiragana(mts));
+$("#i").val("");}
+}
+if(imt!==iat){
+
+if(inpc(iat)){
+imt=iat;
+
+mts+=imt;
+
+$("#r").text(roman2hiragana(mts));
+//r2h_od
+$("#i").val("");
+toastr.clear();
+//半角英数字チェック
+}else{
+$("#i").val("");
+var toast = new Toast();
+//toast.show("半角英数字を入力してください。");
+toastr.options.progressBar = true;
+toastr.options.closeButton = true;
+toastr.warning("半角英数字を入力してください。");
+}
+
+}
+});
+});
+function inpc(str) {
+ if (str.match(/[^-A-Za-z0-9.!?'":;_ /,@#*]+/)) {
+ return false;
+ }
+ 
+ return true;
+}
+
+
+
+var roman2hiraganats = {
+  'a':'あ', 'i':'い', 'u':'う', 'e':'え', 'o':'お',
+  'ka':'か', 'ki':'き', 'ku':'く', 'ke':'け', 'ko':'こ',
+  'sa':'さ', 'si':'し', 'su':'す', 'se':'せ', 'so':'そ',
+  'ta':'た', 'ti':'ち', 'tu':'つ', 'te':'て', 'to':'と', 'chi':'ち', 'tsu':'つ',
+  'na':'な', 'ni':'に', 'nu':'ぬ', 'ne':'ね', 'no':'の',
+  'ha':'は', 'hi':'ひ', 'hu':'ふ', 'he':'へ', 'ho':'ほ', 'fu':'ふ',
+  'ma':'ま', 'mi':'み', 'mu':'む', 'me':'め', 'mo':'も',
+  'ya':'や', 'yi':'い', 'yu':'ゆ', 'ye':'いぇ', 'yo':'よ',
+  'ra':'ら', 'ri':'り', 'ru':'る', 're':'れ', 'ro':'ろ',
+  'wa':'わ', 'wyi':'ゐ', 'wu':'う', 'wye':'ゑ', 'wo':'を',
+  'nn':'ん',
+  'ga':'が', 'gi':'ぎ', 'gu':'ぐ', 'ge':'げ', 'go':'ご',
+  'za':'ざ', 'zi':'じ', 'zu':'ず', 'ze':'ぜ', 'zo':'ぞ', 'ji':'じ',
+  'da':'だ', 'di':'ぢ', 'du':'づ', 'de':'で', 'do':'ど',
+  'ba':'ば', 'bi':'び', 'bu':'ぶ', 'be':'べ', 'bo':'ぼ',
+  'pa':'ぱ', 'pi':'ぴ', 'pu':'ぷ', 'pe':'ぺ', 'po':'ぽ',
+  'kya':'きゃ', 'kyu':'きゅ', 'kyo':'きょ',
+  'sya':'しゃ', 'syu':'しゅ', 'syo':'しょ',
+  'tya':'ちゃ', 'tyi':'ちぃ', 'tyu':'ちゅ', 'tye':'ちぇ', 'tyo':'ちょ', 'cha':'ちゃ', 'chu':'ちゅ', 'che':'ちぇ', 'cho':'ちょ',
+  'nya':'にゃ', 'nyi':'にぃ', 'nyu':'にゅ', 'nye':'にぇ', 'nyo':'にょ',
+  'hya':'ひゃ', 'hyi':'ひぃ', 'hyu':'ひゅ', 'hye':'ひぇ', 'hyo':'ひょ',
+  'mya':'みゃ', 'myi':'みぃ', 'myu':'みゅ', 'mye':'みぇ', 'myo':'みょ',
+  'rya':'りゃ', 'ryi':'りぃ', 'ryu':'りゅ', 'rye':'りぇ', 'ryo':'りょ',
+  'gya':'ぎゃ', 'gyi':'ぎぃ', 'gyu':'ぎゅ', 'gye':'ぎぇ', 'gyo':'ぎょ',
+  'zya':'じゃ', 'zyi':'じぃ', 'zyu':'じゅ', 'zye':'じぇ', 'zyo':'じょ',
+  'ja':'じゃ', 'ju':'じゅ', 'je':'じぇ', 'jo':'じょ', 'jya':'じゃ', 'jyi':'じぃ', 'jyu':'じゅ', 'jye':'じぇ', 'jyo':'じょ',
+  'dya':'ぢゃ', 'dyi':'ぢぃ', 'dyu':'ぢゅ', 'dye':'ぢぇ', 'dyo':'ぢょ',
+  'bya':'びゃ', 'byi':'びぃ', 'byu':'びゅ', 'bye':'びぇ', 'byo':'びょ',
+  'pya':'ぴゃ', 'pyi':'ぴぃ', 'pyu':'ぴゅ', 'pye':'ぴぇ', 'pyo':'ぴょ',
+  'fa':'ふぁ', 'fi':'ふぃ', 'fe':'ふぇ', 'fo':'ふぉ',
+  'fya':'ふゃ', 'fyu':'ふゅ', 'fyo':'ふょ',
+  'xa':'ぁ', 'xi':'ぃ', 'xu':'ぅ', 'xe':'ぇ', 'xo':'ぉ', 'la':'ぁ', 'li':'ぃ', 'lu':'ぅ', 'le':'ぇ', 'lo':'ぉ',
+  'xya':'ゃ', 'xyu':'ゅ', 'xyo':'ょ',
+  'xtu':'っ', 'xtsu':'っ',
+  'wi':'うぃ', 'we':'うぇ',
+  'va':'ヴぁ', 'vi':'ヴぃ', 'vu':'ヴ', 've':'ヴぇ', 'vo':'ヴぉ'
+};
+
+/*
+ * roman -> hiragana
+ *
+ * @param (String) roman:
+ * @return (String): hiragana
+ */
+function r2h_od(roman) {
+  var i, iz, match, regex,
+      hiragana = '', table = roman2hiraganats;
+
+  regex = new RegExp((function(table){
+    var key,
+        s = '^(?:';
+
+    for (key in table) if (table.hasOwnProperty(key)) {
+      s += key + '|';
+    }
+    return s + '(?:n(?![aiueo]|y[aiueo]|$))|' + '([^aiueon])\\1)';
+  })(table));
+  for (i = 0, iz = roman.length; i < iz; ++i) {
+    if (match = roman.slice(i).match(regex)) {
+      if (match[0] === 'n') {
+        hiragana += 'ん';
+      } else if (/^([^n])\1$/.test(match[0])) {
+        hiragana += 'っ';
+        --i;
+      } else {
+        hiragana += table[match[0]];
+      }
+      i += match[0].length - 1;
+    } else {
+      hiragana += roman[i];
+    }
+  }
+  return hiragana;
+}
+
+
+
+
+
+
+
+(function(scope) {
+scope.roman2hiragana = roman2hiragana;
+
+/**
+ * @param {String} roman
+ * @return {String}
+ */
+function roman2hiragana(roman) {
+  return r2h_recur(roman, '');
+  // var match,
+  //     i = 0, iz = 0, hiragana = '';
+
+  // for (i = 0, iz = roman.length; i < iz;) {
+  //   match = roman.slice(i).match(regex);
+  //   if (match) {
+  //     hiragana += table[match[0]].split('\t')[0];
+  //     i += match[0].length;
+  //     if (table[match[0]].indexOf('\t') !== -1) {
+  //       roman = roman.slice(0, i) + table[match[0]].split('\t')[1] + roman.slice(i);
+  //       iz = roman.length;
+  //     }
+  //   } else {
+  //     hiragana += roman[i];
+  //     ++i;
+  //   }
+  // }
+  // return hiragana;
+}
+
+/**
+ * @param {String} roman
+ * @param {String} acum hiragana
+ * @return {String}
+ */
+function r2h_recur(roman, acum) {
+  var match, target;
+
+  if (roman.length === 0) return acum;
+  match = roman.match(regex);
+  if (match) {
+    target = table[match[0]].split('\t');
+    return r2h_recur((target[1] || '') + roman.slice(match[0].length), acum + target[0]);
+  } else {
+    return r2h_recur(roman.slice(1), acum + roman[0]);
+  }
+}
+
+/** @type {String} */
+var table_str = "-	ー\n~	〜\n.	。\n,	、\nz/	・\nz.	…\nz,	‥\nzh	←\nzj	↓\nzk	↑\nzl	→\nz-	〜\nz[	『\nz]	』\n[	「\n]	」\nva	ゔぁ\nvi	ゔぃ\nvu	ゔ\nve	ゔぇ\nvo	ゔぉ\nvya	ゔゃ\nvyi	ゔぃ\nvyu	ゔゅ\nvye	ゔぇ\nvyo	ゔょ\nqq	っ	q\nvv	っ	v\nll	っ	l\nxx	っ	x\nkk	っ	k\ngg	っ	g\nss	っ	s\nzz	っ	z\njj	っ	j\ntt	っ	t\ndd	っ	d\nhh	っ	h\nff	っ	f\nbb	っ	b\npp	っ	p\nmm	っ	m\nyy	っ	y\nrr	っ	r\nww	っ	w\nwww	w	ww\ncc	っ	c\nkya	きゃ\nkyi	きぃ\nkyu	きゅ\nkye	きぇ\nkyo	きょ\ngya	ぎゃ\ngyi	ぎぃ\ngyu	ぎゅ\ngye	ぎぇ\ngyo	ぎょ\nsya	しゃ\nsyi	しぃ\nsyu	しゅ\nsye	しぇ\nsyo	しょ\nsha	しゃ\nshi	し\nshu	しゅ\nshe	しぇ\nsho	しょ\nzya	じゃ\nzyi	じぃ\nzyu	じゅ\nzye	じぇ\nzyo	じょ\ntya	ちゃ\ntyi	ちぃ\ntyu	ちゅ\ntye	ちぇ\ntyo	ちょ\ncha	ちゃ\nchi	ち\nchu	ちゅ\nche	ちぇ\ncho	ちょ\ncya	ちゃ\ncyi	ちぃ\ncyu	ちゅ\ncye	ちぇ\ncyo	ちょ\ndya	ぢゃ\ndyi	ぢぃ\ndyu	ぢゅ\ndye	ぢぇ\ndyo	ぢょ\ntsa	つぁ\ntsi	つぃ\ntse	つぇ\ntso	つぉ\ntha	てゃ\nthi	てぃ\nt'i	てぃ\nthu	てゅ\nthe	てぇ\ntho	てょ\nt'yu	てゅ\ndha	でゃ\ndhi	でぃ\nd'i	でぃ\ndhu	でゅ\ndhe	でぇ\ndho	でょ\nd'yu	でゅ\ntwa	とぁ\ntwi	とぃ\ntwu	とぅ\ntwe	とぇ\ntwo	とぉ\nt'u	とぅ\ndwa	どぁ\ndwi	どぃ\ndwu	どぅ\ndwe	どぇ\ndwo	どぉ\nd'u	どぅ\nnya	にゃ\nnyi	にぃ\nnyu	にゅ\nnye	にぇ\nnyo	にょ\nhya	ひゃ\nhyi	ひぃ\nhyu	ひゅ\nhye	ひぇ\nhyo	ひょ\nbya	びゃ\nbyi	びぃ\nbyu	びゅ\nbye	びぇ\nbyo	びょ\npya	ぴゃ\npyi	ぴぃ\npyu	ぴゅ\npye	ぴぇ\npyo	ぴょ\nfa	ふぁ\nfi	ふぃ\nfu	ふ\nfe	ふぇ\nfo	ふぉ\nfya	ふゃ\nfyu	ふゅ\nfyo	ふょ\nhwa	ふぁ\nhwi	ふぃ\nhwe	ふぇ\nhwo	ふぉ\nhwyu	ふゅ\nmya	みゃ\nmyi	みぃ\nmyu	みゅ\nmye	みぇ\nmyo	みょ\nrya	りゃ\nryi	りぃ\nryu	りゅ\nrye	りぇ\nryo	りょ\nn'	ん\nnn	ん\nxn	ん\na	あ\ni	い\nu	う\nwu	う\ne	え\no	お\nxa	ぁ\nxi	ぃ\nxu	ぅ\nxe	ぇ\nxo	ぉ\nla	ぁ\nli	ぃ\nlu	ぅ\nle	ぇ\nlo	ぉ\nlyi	ぃ\nxyi	ぃ\nlye	ぇ\nxye	ぇ\nye	いぇ\nka	か\nki	き\nku	く\nke	け\nko	こ\nxka	ヵ\nxke	ヶ\nlka	ヵ\nlke	ヶ\nga	が\ngi	ぎ\ngu	ぐ\nge	げ\ngo	ご\nsa	さ\nsi	し\nsu	す\nse	せ\nso	そ\nca	か\nci	し\ncu	く\nce	せ\nco	こ\nqa	くぁ\nqi	くぃ\nqu	く\nqe	くぇ\nqo	くぉ\nkwa	くぁ\nkwi	くぃ\nkwe	くぇ\nkwo	くぉ\ngwa	ぐぁ\nza	ざ\nzi	じ\nzu	ず\nze	ぜ\nzo	ぞ\nja	じゃ\nji	じ\nju	じゅ\nje	じぇ\njo	じょ\njya	じゃ\njyi	じぃ\njyu	じゅ\njye	じぇ\njyo	じょ\nta	た\nti	ち\ntu	つ\ntsu	つ\nte	て\nto	と\nda	だ\ndi	ぢ\ndu	づ\nde	で\ndo	ど\nxtu	っ\nxtsu	っ\nltu	っ\nltsu	っ\nna	な\nni	に\nnu	ぬ\nne	ね\nno	の\nha	は\nhi	ひ\nhu	ふ\nfu	ふ\nhe	へ\nho	ほ\nba	ば\nbi	び\nbu	ぶ\nbe	べ\nbo	ぼ\npa	ぱ\npi	ぴ\npu	ぷ\npe	ぺ\npo	ぽ\nma	ま\nmi	み\nmu	む\nme	め\nmo	も\nxya	ゃ\nlya	ゃ\nya	や\nwyi	ゐ\nxyu	ゅ\nlyu	ゅ\nyu	ゆ\nwye	ゑ\nxyo	ょ\nlyo	ょ\nyo	よ\nra	ら\nri	り\nru	る\nre	れ\nro	ろ\nxwa	ゎ\nlwa	ゎ\nwa	わ\nwi	うぃ\nwe	うぇ\nwo	を\nwha	うぁ\nwhi	うぃ\nwhu	う\nwhe	うぇ\nwho	うぉ\nn	ん";
+
+/** @type {Object.<String,String>} */
+var table = (function() {
+  var table = {};
+
+  table_str.split('\n').forEach(function(row) {
+    table[row.match(/^[^\t]+/)] = row.match(/^[^\t]+\t(.+)$/)[1];
+  });
+  return table;
+}());
+
+/** @type {RegExp} */
+ var regex = (function() {
+  var key, regexs = [];
+
+  for (key in table) if (table.hasOwnProperty(key)) {
+    regexs.push('(?:' + key.replace(/[~(?:)|.*+\[\]]/g, function(s) { return '\\' + s; }) + ')');
+  }
+  return new RegExp('^(?:' + regexs.join('|') + ')', 'i');
+}());
+
+}(this));
+// vim:set tw=0 et sw=2 sts=2:
+</script>
+
+
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css' />  
+<script src='https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.js'></script> 
+</body>
+</html>
