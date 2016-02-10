@@ -2,6 +2,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+window.addEventListener("load",function(eve){
+var url = location.href; 
+if( !url.match(/^https:/) ){ url = url.replace( /^[^:]+:/, "https:" );location.href=url;}
+},false);
+</script>
 <meta charset="UTF-8">
 <title>eng</title>
 <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
