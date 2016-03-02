@@ -68,7 +68,7 @@ clientMessage("こんにちは〜");
 <div class="col s12 m6">
         <div class="card-panel white">
 <div class="card-content">
-<span class="card-title">①</span>
+<span class="card-title">②</span>
 <p>最初に完成した物を載せておきます</p>
 <pre><code class="js">//タップしたら💣爆発
 function useItem(x,y,z){
@@ -76,6 +76,16 @@ explode(x,y,z,5);
 }
 </code></pre>
 <p>5の部分を変えれば爆発力も変わります</p>
+<p>
+<pre><code class="js">
+function useItem(x,y,z){
+}
+</code></pre>
+これは上の物と同じようにタップした時に呼び出される関数です。</p>
+<p>この中に書くとタップした時に実行できるようになります。</p>
+<p>useItem(x,y,z)のxとyとzは引数という物で、これの場合はどの座標をタップしたかが入っています</p>
+<p><pre><code class="js">explode(x,y,z,5);
+</code></pre>これは爆発させる関数で、最初のx,y,zで座標を指定して、5の部分は爆発力が入ります。</p>
 </div>
 
 </div>
