@@ -48,7 +48,7 @@ background-color:rgba(144,202,249,0.2);
 <div class="col s12 m6">
         <div class="card-panel white">
 <div class="card-content">
-<span class="card-title">①</span>
+<span class="card-title">①　フック</span>
 <p>最初に完成した物を載せておきます</p>
 <pre><code class="js">//ワールドに入るとこんにちは〜と表示
 function newLevel(){
@@ -68,7 +68,7 @@ clientMessage("こんにちは〜");
 <div class="col s12 m6">
         <div class="card-panel white">
 <div class="card-content">
-<span class="card-title">②</span>
+<span class="card-title">②　組み込み関数</span>
 <p>最初に完成した物を載せておきます</p>
 <pre><code class="js">//タップしたら💣爆発
 function useItem(x,y,z){
@@ -86,6 +86,33 @@ function useItem(x,y,z){
 <p>useItem(x,y,z)のxとyとzは引数という物で、これの場合はどの座標をタップしたかが入っています</p>
 <p><pre><code class="js">explode(x,y,z,5);
 </code></pre>これは爆発させる関数で、最初のx,y,zで座標を指定して、5の部分は爆発力が入ります。</p>
+</div>
+
+</div>
+</div>
+<div class="col s12 m6">
+        <div class="card-panel white">
+<div class="card-content">
+<span class="card-title">③　組み込み関数2+条件式</span>
+<p>最初に完成した物を載せておきます</p>
+<pre><code class="js">//木の棒でブロックをタップすると焼石設置
+function useItem(x,y,z,itemid){
+if(itemid == 280){
+Level.setTile(x,y,z,1,0);
+}
+}
+</code></pre>
+<p></p>
+<pre><code class="js">function useItem(x,y,z,itemid){
+}</code></pre>
+<p>さっきと同じです。itemidにはタップした時のアイテムidが入っています。</p>
+<p><pre><code class="js">if(itemid == 280){
+}</code></pre>
+if文です。
+()の中がtrueになれば実行されます。
+これの場合(itemid == 280)なのでitemidが280(木の棒)ならtrueになり実行されます。
+Level.setTile()はブロックを設置する関数です。
+</p>
 </div>
 
 </div>
