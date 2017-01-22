@@ -34,7 +34,13 @@
           var result = event.results[event.resultIndex][0].transcript;
           document.getElementById('result').innerHTML = result;
           //ws.send(result);
-          $.ajax({url:"http://localhost:21302/"+result});
+          $.ajax({url:"http://localhost:21302/"+result}).done(function(r){
+            if(r=="ok"){
+            $("#res").text("正常に再生されました");
+            }else{
+            $("#res").text("エラー");
+            }
+          });
         }
       }
 
@@ -45,5 +51,6 @@
 </head>
 <body>
   <div id="result"></div>
+  <div id="res"></div>
 </body>
 </html>
