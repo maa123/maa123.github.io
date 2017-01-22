@@ -43,13 +43,23 @@
             }else{
 //            $("#res").text("エラー");
             }
-          });
+          });cc(result);
+          
         }
       }
 
       // 音声認識開始　
       recognition.start();
     })();
+    function cc(tx){
+	var url='http://yomi-tan.jp/api/yomi.php?ic=UTF-8&oc=UTF-8&k=h&n=3&t='+tx;
+$.ajax({
+'url':"http://query.yahooapis.com/v1/public/yql?q=SELECT%20*%20FROM%20html%20WHERE%20url%3D'"+url+"'&format=json&diagnostics=true&callback=",
+'dataType':'json'
+}).done(function(r){
+	console.log(r['query']['results']['body']);
+});
+}
   </script>
 </head>
 <body>
