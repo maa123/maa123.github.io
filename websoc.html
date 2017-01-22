@@ -34,13 +34,16 @@
           var result = event.results[event.resultIndex][0].transcript;
           document.getElementById('result').innerHTML = result;
           //ws.send(result);
-          $.ajax({url:"http://localhost:21302/"+result}).done(function(r){
+          $.ajax({url:"http://yomi-tan.jp/api/yomi.php?ic=UTF-8&oc=UTF-8&k=h&n=3&t="+result,dataType:"text"}).done(function(r){
+          $.ajax({url:"http://localhost:21302/"+r});
+          });
+          /*$.ajax({url:"http://localhost:21302/"+result}).done(function(r){
             if(r=="ok"){
 //            $("#res").text("正常に再生されました");
             }else{
 //            $("#res").text("エラー");
             }
-          });
+          });*/
         }
       }
 
