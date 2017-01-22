@@ -52,7 +52,7 @@
       recognition.start();
     })();
     function cc(tx){
-	var url=encodeURI('http://yomi-tan.jp/api/yomi.php?ic=UTF-8&oc=UTF-8&k=h&n=3&t='+tx);
+	var url=encodeURIComponent('http://yomi-tan.jp/api/yomi.php?ic=UTF-8&oc=UTF-8&k=h&n=3&t='+tx);
 $.ajax({
 'url':"http://query.yahooapis.com/v1/public/yql?q=SELECT%20*%20FROM%20html%20WHERE%20url%3D'"+url+"'&format=json&diagnostics=true&callback=",
 'dataType':'json'
