@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Web Speech sender</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script>
     (function() {
       // WebSocket でサーバと接続
@@ -37,7 +37,7 @@
           /*$.ajax({url:"http://yomi-tan.jp/api/yomi.php?ic=UTF-8&oc=UTF-8&k=h&n=3&t="+result,dataType:"text"}).done(function(r){
           $.ajax({url:"http://localhost:21302/"+r});
           });*/
-          $.ajax({url:"http://localhost:21302/"+result}).done(function(r){
+          $.ajax({url:"https://localhost:21302/"+result}).done(function(r){
             if(r=="ok"){
 //            $("#res").text("正常に再生されました");
             }else{
@@ -54,7 +54,7 @@
     function cc(tx){
 	var url=encodeURIComponent('http://yomi-tan.jp/api/yomi.php?ic=UTF-8&oc=UTF-8&k=h&n=3&t='+tx);
 $.ajax({
-'url':"http://query.yahooapis.com/v1/public/yql?q=SELECT%20*%20FROM%20html%20WHERE%20url%3D'"+url+"'&format=json&diagnostics=true&callback=",
+'url':"https://query.yahooapis.com/v1/public/yql?q=SELECT%20*%20FROM%20html%20WHERE%20url%3D'"+url+"'&format=json&diagnostics=true&callback=",
 'dataType':'json'
 }).done(function(r){
 	console.log(r['query']['results']['body']);
