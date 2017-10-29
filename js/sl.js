@@ -8,7 +8,7 @@ function nsc(at, am, nct) {
     }
 }
 
-window.addEventListener('DOMContentLoaded', function() {
+//window.addEventListener('DOMContentLoaded', function() {
     var ct = document.getElementById('footer').getBoundingClientRect().top;
     setTimeout(nsc, 10, (ct / 20), (ct % 20), 0);
-});
+//});
