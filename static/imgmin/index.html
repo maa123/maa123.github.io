@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name=viewport content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#9ccc65"/><meta name="apple-mobile-web-app-capable" content="yes" />
+
+<style>
+.rsf{
+  position: relative;
+}
+#rs{
+  max-width:95vw;
+  max-height:90vh;
+  position: absolute;
+  top:0;
+  z-index:2;
+}
+.center{
+text-align:center;
+}
+.process{
+  position: absolute;
+  top:5em;
+  height:3em;
+  width:3em;
+  background: #555;
+  display: inline-block;
+  animation:rotate-anime 2s linear infinite;
+}
+@keyframes rotate-anime {
+0%  {transform: rotate(0);}
+100%  {transform: rotate(360deg);}
+}
+</style>
+<meta charset="UTF-8">
+<title>maa123's Dev Page</title>
+</head>
+<body>
+<p>画像リサイズツール(オフライン)</p>
+
+<form id="igf">
+<input type="file" id="fl" accept="image/*" required>
+<button type="submit">縮小</button><span id="prtxt"></span>
+</form>
+<div class="rsf">
+<img id="rs">
+<div class="center">
+<div class="process"></div>
+</div>
+</div>
+<script defer src="jquery.min.js"></script>
+<script defer src="main.js"></script>
+</body>
+</html>
