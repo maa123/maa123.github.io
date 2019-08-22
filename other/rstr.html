@@ -57,7 +57,7 @@ const getRandomWord = (length = 5) => {
 const sleep = (ms) => {return new Promise((r,j) => {setTimeout(()=>{r();}, ms);});};
 (async()=>{
   document.title = getRandomWord(20);
-	await sleep(5000);
+	await sleep(1000);
 	const te = document.getElementById("t");
 	const bd = document.body;
 	const sc = document.getElementById("s");
