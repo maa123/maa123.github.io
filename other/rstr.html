@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<style>
+		body{
+			background-color: #0f0f0f;
+			color: white;
+		}
+		p{color:#fff;}
+	</style>
+</head>
+<body>
+	<p id="t"></p>
+	<div id="s"> </div>
+<script>
+	const getRandomCode = (chars) => {
+	let carr = [];
+	let count = 0;
+	for (let i = 0; i < chars.length; i++) {
+		carr[i] = chars[i][1] - chars[i][0] + 1;
+		count += carr[i];
+	};
+	let select = Math.floor(Math.random()*count);
+	for (let i = 0; i < carr.length; i++) {
+		if((select - carr[i]) < 0){
+			return select + chars[i][0];
+		}else{
+			select -= carr[i];
+		}
+	};
+}
+
+const getRandomWord = (length = 5) => {
+	const chars_hk = [
+	[0x3041,0x3096],
+	[0x30A1,0x30FA]];
+	const chars = [
+	[0x3041,0x3096],
+	[0x30A1,0x30FA],
+	[0x3400,0x9FFF],
+	[0xF900,0xFAFF]];
+	let word = '';
+	for(let i = length; i > 0; i--){
+		if(Math.floor(Math.random()*2)){
+			word += String.fromCharCode(getRandomCode(chars));
+		}else{
+			word += String.fromCharCode(getRandomCode(chars_hk));
+		}
+		
+	}
+	return word;
+}
+const sleep = (ms) => {return new Promise((r,j) => {setTimeout(()=>{r();}, ms);});};
+(async()=>{
+  document.title = getRandomWord(20);
+	await sleep(5000);
+	const te = document.getElementById("t");
+	const bd = document.body;
+	const sc = document.getElementById("s");
+	for(let i = 0; i < 100000; i++){
+		await sleep(2);
+		te.textContent += getRandomWord(2);
+		if(!(i%10)){
+			sc.scrollIntoView(true);
+		}
+	}
+})();
+</script>
+</body>
+</html>
